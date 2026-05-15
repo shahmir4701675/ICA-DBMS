@@ -1,0 +1,339 @@
+/* ==========================================================================
+   ICA DBMS — Global Stylesheet
+   Uses Tailwind base + custom overrides for premium industrial dark mode
+   ========================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------------------------------
+   Base reset & typography
+   -------------------------------------------------------------------------- */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-slate-900 text-slate-100 font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar — slim and dark */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Component layer — reusable design tokens
+   -------------------------------------------------------------------------- */
+@layer components {
+
+  /* ----- Glass card ----- */
+  .glass-card {
+    @apply bg-slate-800/60 backdrop-blur-sm border border-slate-700/50
+           rounded-xl shadow-xl;
+  }
+
+  /* ----- Gradient accent border ----- */
+  .accent-border {
+    border-image: linear-gradient(135deg, #38BDF8, #A78BFA) 1;
+  }
+
+  /* ----- Stat card ----- */
+  .stat-card {
+    @apply glass-card p-5 flex flex-col gap-2 hover:border-sky-500/40
+           transition-all duration-300;
+  }
+
+  /* ----- Table styles ----- */
+  .data-table {
+    @apply w-full text-sm text-left text-slate-300 border-collapse;
+  }
+  .data-table thead tr {
+    @apply bg-slate-700/80 text-xs uppercase tracking-wider text-slate-400;
+  }
+  .data-table thead th {
+    @apply px-4 py-3 font-semibold;
+  }
+  .data-table tbody tr {
+    @apply border-b border-slate-700/50 hover:bg-slate-700/40
+           transition-colors duration-150;
+  }
+  .data-table tbody td {
+    @apply px-4 py-3;
+  }
+
+  /* ----- Badge ----- */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full
+           text-xs font-semibold;
+  }
+  .badge-green   { @apply badge bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+  .badge-orange  { @apply badge bg-orange-500/20  text-orange-400  border border-orange-500/30; }
+  .badge-red     { @apply badge bg-red-500/20     text-red-400     border border-red-500/30; }
+  .badge-blue    { @apply badge bg-sky-500/20     text-sky-400     border border-sky-500/30; }
+  .badge-purple  { @apply badge bg-violet-500/20  text-violet-400  border border-violet-500/30; }
+  .badge-slate   { @apply badge bg-slate-500/20   text-slate-400   border border-slate-500/30; }
+
+  /* ----- Button ----- */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500
+           text-white font-semibold text-sm hover:bg-sky-400 active:scale-95
+           transition-all duration-200 shadow-lg shadow-sky-500/20;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-700
+           text-slate-300 font-medium text-sm hover:bg-slate-600
+           transition-all duration-200;
+  }
+
+  /* ----- Search input ----- */
+  .search-input {
+    @apply w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3
+           text-slate-200 placeholder-slate-500 text-sm
+           focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+           transition-all duration-200;
+  }
+
+  /* ----- Sidebar nav item ----- */
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400
+           font-medium text-sm cursor-pointer transition-all duration-200;
+  }
+  .nav-item:hover {
+    @apply bg-slate-700/60 text-slate-200;
+  }
+  .nav-item.active {
+    @apply bg-sky-500/10 text-sky-400 border border-sky-500/20;
+  }
+
+  /* ----- Low-stock row highlight ----- */
+  .low-stock-row {
+    @apply bg-orange-500/5 border-l-2 border-orange-400;
+  }
+
+  /* ----- Modal overlay ----- */
+  /*
+   * IMPORTANT: These use explicit CSS (not @apply) so they cannot be
+   * overridden by Tailwind's layer cascade or parent stacking contexts.
+   * The z-index is intentionally very high (9999) to sit above sidebars,
+   * sticky headers, and any other positioned ancestors.
+   */
+  .modal-overlay {
+    /* Positioning — fixed to viewport, never tied to parent */
+    position: fixed !important;
+    inset: 0 !important;
+    /* Stacking — above everything */
+    z-index: 9999 !important;
+    /* Centering — both axes */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Padding prevents modal touching viewport edges on small screens */
+    padding: 1rem !important;
+    /* Backdrop */
+    background-color: rgba(2, 6, 23, 0.82) !important; /* slate-950/82% */
+    backdrop-filter: blur(4px) !important;
+  }
+
+  .modal-box {
+    /* Sizing */
+    position: relative;
+    width: 100%;
+    max-width: 42rem;          /* ~2xl — overridden per-instance by max-w-lg etc. */
+    /* Height constraint — scroll INSIDE the box, not the page */
+    max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;  /* prevents scroll from bleeding to body */
+    /* Visual */
+    background-color: rgba(30, 41, 59, 0.95); /* slate-800/95 */
+    border: 1px solid rgba(71, 85, 105, 0.5); /* slate-700/50 */
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.03);
+    animation: modalIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Custom animations
+   -------------------------------------------------------------------------- */
+@layer utilities {
+  .animate-modal-in {
+    animation: modalIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease forwards;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.3s ease forwards;
+  }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* --------------------------------------------------------------------------
+   Print styles — Invoice isolation
+   Only #invoice-print-area is visible on paper. Everything else is hidden.
+   -------------------------------------------------------------------------- */
+@media print {
+
+  /* 1. Hide every element on the page */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* 2. Reveal only the invoice content and all its children */
+  #invoice-print-area,
+  #invoice-print-area * {
+    visibility: visible !important;
+  }
+
+  /* 3. Use position:absolute (NOT fixed — fixed breaks print in Chrome/Edge) */
+  #invoice-print-area {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding: 28px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+
+    /* White background, dark text */
+    background: #ffffff !important;
+    color: #111827 !important;
+
+    /* Strip dark UI chrome */
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+  }
+
+  /* 4. Force all text to black */
+  #invoice-print-area p,
+  #invoice-print-area span,
+  #invoice-print-area td,
+  #invoice-print-area th,
+  #invoice-print-area h1,
+  #invoice-print-area h2,
+  #invoice-print-area h3 {
+    color: #111827 !important;
+    background: transparent !important;
+  }
+
+  /* 5. Company name — professional navy instead of sky-blue */
+  #invoice-print-area .invoice-company-name {
+    color: #1e3a5f !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+  }
+
+  /* 6. Section divider line */
+  #invoice-print-area .invoice-header-section {
+    border-bottom: 2px solid #cbd5e1 !important;
+    padding-bottom: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* 7. Payment status badge — print-friendly pill */
+  #invoice-print-area .invoice-payment-badge {
+    border: 1px solid #475569 !important;
+    color: #1e293b !important;
+    background: #f1f5f9 !important;
+    border-radius: 999px !important;
+    padding: 2px 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+  }
+
+  /* 8. Table chrome */
+  #invoice-print-area table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+  #invoice-print-area thead tr {
+    background: #f1f5f9 !important;
+  }
+  #invoice-print-area thead th {
+    color: #374151 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    background: #f1f5f9 !important;
+  }
+  #invoice-print-area tbody tr {
+    border-bottom: 1px solid #e2e8f0 !important;
+    background: transparent !important;
+  }
+
+  /* 9. Total Due row */
+  #invoice-print-area .invoice-total-row {
+    background: #f0f4f8 !important;
+  }
+  #invoice-print-area .invoice-total-row td {
+    color: #1e3a5f !important;
+    font-weight: 700 !important;
+    background: #f0f4f8 !important;
+  }
+
+  /* 10. Invoice number (large heading top-right) */
+  #invoice-print-area .invoice-number {
+    color: #111827 !important;
+  }
+
+  /* 11. Footer bar */
+  #invoice-print-area .invoice-footer-section {
+    border-top: 1px solid #e2e8f0 !important;
+    color: #6b7280 !important;
+    margin-top: 14px !important;
+    padding-top: 10px !important;
+  }
+
+  /* 12. Ensure the print button itself is never visible */
+  .no-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* 13. A4 page settings */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+}
+

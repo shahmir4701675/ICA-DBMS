@@ -1,0 +1,6 @@
+supplier_id,name,contact,category
+1,Siemens Industrial,sales@siemens-ind.com,PLCs & Drives
+2,Automation Direct,support@automationdirect.com,Sensors & Components
+3,Global Electronics,info@globalelec.com,Transistors & Diodes
+4,Rockwell Automation,orders@rockwell.com,Industrial Controllers
+5,Schneider Electric,contact@schneider.com,Power Systems

@@ -1,0 +1,21 @@
+schedule_id,client_id,equipment_name,last_service_date,next_service_date,technician_assigned
+1,5,Conveyor Drive Unit,2024-11-24,2025-05-23,Kabeer
+2,4,Production Line A PLC,2024-12-19,2025-06-17,Syed Huzaifa
+3,3,Production Line A PLC,2024-12-06,2025-06-04,Mohammad Shahmir
+4,4,Conveyor Drive Unit,2024-12-27,2025-06-25,Kabeer
+5,1,Conveyor Drive Unit,2024-11-02,2025-05-01,Syed Huzaifa
+6,2,Conveyor Drive Unit,2024-11-20,2025-05-19,Arbab
+7,5,Production Line A PLC,2024-11-27,2025-05-26,Syed Huzaifa
+8,1,Production Line A PLC,2024-11-30,2025-05-29,Syed Huzaifa
+9,4,Conveyor Drive Unit,2024-12-30,2025-06-28,Mohammad Shahmir
+10,5,Boiler Control System,2024-12-16,2025-06-14,Kabeer
+11,4,Production Line A PLC,2024-12-01,2025-05-30,Kabeer
+12,5,Boiler Control System,2024-11-10,2025-05-09,Syed Huzaifa
+13,5,Conveyor Drive Unit,2024-12-03,2025-06-01,Syed Huzaifa
+14,1,Boiler Control System,2024-11-18,2025-05-17,Mohammad Shahmir
+15,5,Production Line A PLC,2024-11-18,2025-05-17,Mohammad Shahmir
+16,3,Conveyor Drive Unit,2024-12-24,2025-06-22,Kabeer
+17,2,Conveyor Drive Unit,2024-11-29,2025-05-28,Kabeer
+18,3,Conveyor Drive Unit,2024-11-22,2025-05-21,Kabeer
+19,4,Boiler Control System,2024-12-30,2025-06-28,Syed Huzaifa
+20,2,Boiler Control System,2024-12-07,2025-06-05,Syed Huzaifa
