@@ -1,7 +1,7 @@
 """
 =============================================================================
   Intelligent Controls & Automation (ICA) - DBMS Backend
-  Author : CSE 4th Semester Project
+  Author : SHAHMIR
   Stack  : Flask + Supabase-py
   Desc   : REST API server that bridges the React frontend with the
            Supabase PostgreSQL database.
